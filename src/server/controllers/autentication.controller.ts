@@ -1,15 +1,35 @@
 import { Request, Response } from "express";
-import { AutenticarUsuario } from "@services/security/autentication.service";
+import { singInUser } from "@services/security/autentication.service";
+import { generateToken } from "@plugins/jwt.plugin";
+import { user } from "@interfaces/user.inteface";
 
 export const login = async(req:Request, res:Response) => {
     try {              
-        const user = await AutenticarUsuario({email: 'miguel', password: '123456'})
-        // sign(user, KEY, {expiresIn: "4h"},  async (err, token)=>{               
-        //     if(err) { 
-        //         res.status(401).json(await failMessage(authObjMessages.tokenFailGenerate))
-        //     }                
-        //     res.json({status : ok, token, user}) 
-        // })                    
+        const user:user = await singInUser({email: 'miguel', password: '123456'})
+
+        if(typeof user === 'undefined')
+            res.status(401).json({message: 'invalid credentials'})
+        
+        const token = generateToken(user.userId)
+        res.json({token})
+                 
+    } catch (error) {    
+        res.status(401).json("user not found")   
+    }  
+    
+    return
+};
+
+export const logout= async(req:Request, res:Response) => {
+    try {              
+        const user:user = await singInUser({email: 'miguel', password: '123456'})
+
+        if(typeof user === 'undefined')
+            return res.status(401).json({message: 'invalid credentials'})
+        
+        const token = generateToken(user.userId)
+        res.json({token})
+                 
     } catch (error) {    
         res.status(401).json("user not found")   
     }    

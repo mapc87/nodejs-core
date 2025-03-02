@@ -24,3 +24,4 @@ export const KEY = process.env.KEY
 //Messages
 export const MESSAGE_OK = { status : "OK", message : ""}
 export const MESSAGE_FAIL = { status : "FAIL", message : "Usuario no autenticado"}
+
