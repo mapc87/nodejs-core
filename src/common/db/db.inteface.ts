@@ -10,7 +10,9 @@ export interface Table{
 
 export interface Condition{    
     conditionField: string; 
-    condition: string | '>' | '<' | '<>'| '<=' | '>=' | 'IN' | 'BETWEEN' | 'ANY'; 
-    condtionValue: string;
+    condition: '='|'>' | '<' | '<>'| '<=' | '>=' | 'IN' | 'BETWEEN' | 'ANY' | 'LIKE'; 
+    condtionValue: string|number|boolean;
     connector: string | 'AND' | 'OR';
+    // open: string | '('
+    // close: string | ')'
 }

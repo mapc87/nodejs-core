@@ -9,20 +9,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.login = void 0;
+exports.logout = exports.login = void 0;
 const autentication_service_1 = require("@services/security/autentication.service");
+const jwt_plugin_1 = require("@plugins/jwt.plugin");
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const user = yield (0, autentication_service_1.AutenticarUsuario)({ email: 'miguel', password: '123456' });
-        // sign(user, KEY, {expiresIn: "4h"},  async (err, token)=>{               
-        //     if(err) { 
-        //         res.status(401).json(await failMessage(authObjMessages.tokenFailGenerate))
-        //     }                
-        //     res.json({status : ok, token, user}) 
-        // })                    
+        const user = yield (0, autentication_service_1.singInUser)({ email: 'miguel', password: '123456' });
+        if (typeof user === 'undefined')
+            res.status(401).json({ message: 'invalid credentials' });
+        const token = (0, jwt_plugin_1.generateToken)(user.userId);
+        res.json({ token });
+    }
+    catch (error) {
+        res.status(401).json("user not found");
+    }
+    return;
+});
+exports.login = login;
+const logout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const user = yield (0, autentication_service_1.singInUser)({ email: 'miguel', password: '123456' });
+        if (typeof user === 'undefined')
+            return res.status(401).json({ message: 'invalid credentials' });
+        const token = (0, jwt_plugin_1.generateToken)(user.userId);
+        res.json({ token });
     }
     catch (error) {
         res.status(401).json("user not found");
     }
 });
-exports.login = login;
+exports.logout = logout;

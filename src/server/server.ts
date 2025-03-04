@@ -1,10 +1,12 @@
 import express, { Express, request, Request, response, Response } from "express";
 import cors from 'cors'
 
-//routes
-import autentication from "./routes/autentication.routes"
+//middlewares
 import { validateToken } from "@middlewares/autentication.middelware";
 
+//routes
+import autentication from "./routes/autentication.routes"
+import company from "./routes/company.routes"
 
 const app: Express = express();
 
@@ -18,7 +20,8 @@ app.use(cors({
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use('/api/', autentication)
-app.use(validateToken)
+app.use('/api/', company)
+//app.use(validateToken)
 
 app.use(cors(),(req:Request, res:Response, next) => {
   res.status(404).json({
