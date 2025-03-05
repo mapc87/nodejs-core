@@ -1,6 +1,7 @@
-import { Condition } from './db.inteface';
+import { Condition } from './interfaces/db.inteface';
 import { ClsQueryBuilder } from './query-builder.class';
-import db from '@configuration/db'
+import db from '@configuration/db.configuration'
+import { ResultSetHeader } from 'mysql2';
 
 export class ClsDb{
 
@@ -12,18 +13,31 @@ export class ClsDb{
         this.queryBuilder = new ClsQueryBuilder(tableName);
     }
 
-    async Select(fields?: string[], condition?: Condition[]){
+    async select(fields?: string[], condition?: Condition[]){
         const sql = this.queryBuilder.getSqlSelect(fields, condition);
         // let [rows, fields] = await this.#executeQuery(sql)
         console.log(sql)
         return sql;
     }
 
-    async create(object: Object){
-        const sql = this.queryBuilder.getSqlCreate(object);
+
+
+    async insert(object: Object){
+        const sql = this.queryBuilder.getSqlInsert(object);
         // let [rows, fields] = await this.#executeQuery(sql)
         console.log(sql)
         return sql;
+    }
+
+    async multipleInsert(objects:object[]){
+        if(objects.length> 1){
+            objects.forEach(async(o)=>{
+                let sql = this.queryBuilder.getSqlInsert(o);
+                //let [rows, fields] = await this.#executeQuery(sql)
+                
+            })            
+        }   
+        return 
     }
 
     async update(object: Object,conditions:Condition[]){       

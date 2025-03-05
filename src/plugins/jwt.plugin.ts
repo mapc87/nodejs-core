@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import {KEY} from '@configuration/config'
+import {KEY} from '@configuration/config.configuration'
 
 const JWT_SECRET = typeof KEY != 'undefined'? KEY: 'T3mp0r@lK3Y';
 

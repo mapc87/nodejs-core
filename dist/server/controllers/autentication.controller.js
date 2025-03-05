@@ -14,7 +14,7 @@ const autentication_service_1 = require("@services/security/autentication.servic
 const jwt_plugin_1 = require("@plugins/jwt.plugin");
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const user = yield (0, autentication_service_1.singInUser)({ email: 'miguel', password: '123456' });
+        const user = yield (0, autentication_service_1.singInUser)({ username: 'miguel', password: '123456' });
         if (typeof user === 'undefined')
             res.status(401).json({ message: 'invalid credentials' });
         const token = (0, jwt_plugin_1.generateToken)(user.userId);
@@ -28,7 +28,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.login = login;
 const logout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const user = yield (0, autentication_service_1.singInUser)({ email: 'miguel', password: '123456' });
+        const user = yield (0, autentication_service_1.singInUser)({ username: 'miguel', password: '123456' });
         if (typeof user === 'undefined')
             return res.status(401).json({ message: 'invalid credentials' });
         const token = (0, jwt_plugin_1.generateToken)(user.userId);

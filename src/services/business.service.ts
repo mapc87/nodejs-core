@@ -1,6 +1,6 @@
-import { Condition} from "@common/db/db.inteface";
+import { Condition} from "src/db/interfaces/db.inteface";
 import { Bussines } from "@interfaces/bussines.inteface";
-import { ClsDbService} from "@common/db/db.service.class";
+import { ClsDbService} from "src/db/db.service.class";
 
 const dbService = new ClsDbService("BUSSINES");
 

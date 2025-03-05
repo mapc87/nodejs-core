@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteBusiness = exports.activateInactiveBusiness = exports.updateBusiness = exports.createBusiness = exports.selectBusiness = void 0;
-const db_service_class_1 = require("@common/db/db.service.class");
+const db_service_class_1 = require("src/db/db.service.class");
 const dbService = new db_service_class_1.ClsDbService("BUSSINES");
 const selectBusiness = () => {
     let conditions = [{

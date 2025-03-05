@@ -1,5 +1,5 @@
-import { ClsDb } from "@common/db/db.repository.class";
-import { Condition } from "@common/db/db.inteface";
+import { ClsDb } from "src/db/db.repository.class";
+import { Condition } from "src/db/interfaces/db.inteface";
 
 export class ClsDbService{
     tableName = "";
@@ -11,11 +11,11 @@ export class ClsDbService{
     }
 
     select(fields?:string[], conditions?:Condition[]){
-        return this.db.Select(fields, conditions)
+        return this.db.select(fields, conditions)
     }
 
     insert(object: Object){
-        return this.db.create(object);
+        return this.db.insert(object);
     }
 
     update(object: Object, conditions:Condition[]){

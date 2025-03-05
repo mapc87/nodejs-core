@@ -1,4 +1,4 @@
-import { Condition, KeyValue } from './db.inteface';
+import { Condition, KeyValue } from './interfaces/db.inteface';
 
 export class ClsQueryBuilder
 {    
@@ -38,7 +38,7 @@ export class ClsQueryBuilder
         return sql;    
     }
 
-    getSqlCreate(object: Object):string {
+    getSqlInsert(object: Object):string {
         let keyValues = this.#getkeyValues(object)
 
         let sql = "";

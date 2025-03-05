@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.validateToken = void 0;
 const jwt_plugin_1 = require("@plugins/jwt.plugin");
-const auth_messages_1 = require("@common/messages/auth.messages");
+const auth_messages_1 = require("@common/messages/es/auth.messages");
 const status_messages_1 = require("@common/messages/status.messages");
 const validateToken = (req, res, next) => {
     var _a, _b;

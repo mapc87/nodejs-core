@@ -1,4 +1,4 @@
-import express, { Express, request, Request, response, Response } from "express";
+import express, { Express, Request, Response } from "express";
 import cors from 'cors'
 
 //middlewares
@@ -6,7 +6,8 @@ import { validateToken } from "@middlewares/autentication.middelware";
 
 //routes
 import autentication from "./routes/autentication.routes"
-import company from "./routes/company.routes"
+import bussines from "./routes/company.routes"
+import test from "./routes/test.routes"
 
 const app: Express = express();
 
@@ -20,7 +21,8 @@ app.use(cors({
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use('/api/', autentication)
-app.use('/api/', company)
+app.use('/api/', bussines)
+app.use('/api/', test)
 //app.use(validateToken)
 
 app.use(cors(),(req:Request, res:Response, next) => {

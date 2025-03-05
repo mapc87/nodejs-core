@@ -1,12 +1,15 @@
 export interface user {
     userId: number;
+    fistName:string;
+    lastName: string;
     email: string;
-    name: string;
+    recovery_phone: string;
+    username:string;
     password: string; 
+    active: boolean; 
 }
 
-
 export interface UserCredentials {
-    email: string;
+    username: string;
     password: string;
 }

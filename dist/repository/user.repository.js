@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.dbGetUser = void 0;
-const db_1 = __importDefault(require("@configuration/db"));
+const db_configuration_1 = __importDefault(require("@configuration/db.configuration"));
 const dbGetUser = (email) => __awaiter(void 0, void 0, void 0, function* () {
     const sqlQuery = `SELECT 
                         u.id_user as idUser,
@@ -25,7 +25,7 @@ const dbGetUser = (email) => __awaiter(void 0, void 0, void 0, function* () {
                     WHERE
                         u.email = '${email}'
                     `;
-    const [rows] = yield db_1.default.query(sqlQuery);
+    const [rows] = yield db_configuration_1.default.query(sqlQuery);
     console.log(rows);
     return rows;
 });

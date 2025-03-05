@@ -6,6 +6,7 @@ export interface Telephone{
 }
 
 interface type{
-    idTipe: number;
+    idType: number;
     type: string; 
 }
+

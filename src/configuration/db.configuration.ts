@@ -1,5 +1,5 @@
 import mysql2, { PoolOptions } from "mysql2/promise"
-import {DB_DATABASE, DB_HOST, DB_PASSWORD, DB_PORT, DB_USER} from '@configuration/config'
+import {DB_DATABASE, DB_HOST, DB_PASSWORD, DB_PORT, DB_USER} from '@configuration/config.configuration'
 
 const access: PoolOptions = {
     host: DB_HOST,

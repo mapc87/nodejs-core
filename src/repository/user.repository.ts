@@ -1,4 +1,4 @@
-import db from '@configuration/db'
+import db from '@configuration/db.configuration'
 
 export const dbGetUser = async (email: string) => {
     const sqlQuery = `SELECT 

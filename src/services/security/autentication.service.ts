@@ -1,28 +1,45 @@
 import {dbGetUser} from "@repository/user.repository"
 import { user, UserCredentials } from "@interfaces/user.inteface"
-import { authMessages } from "@common/messages/auth.messages"
-import { OkMessage, failMessage } from "@common/messages/status.messages"
-import { generateHashPassword, verifyPassword} from "@plugins/hash-generator.plugin"
+import { authMessages as am} from "@common/messages/es/auth.messages"
+import { verifyPassword} from "@plugins/hash-generator.plugin"
+import { buildStatusMessage } from "@plugins/build-message.plugin"
 
 
 export const singInUser = async(credentials:UserCredentials):Promise<user> => {
     return new Promise(async(resolve, reject)=>{
 
-        const userInfo:user = await dbGetUser(credentials.email) 
+        let returnMessage = {}
+        let logMessage = ""
 
-         if(!userInfo)
-             reject("authObjMessages.badCreedentials")
+        if(!credentials){   
+            returnMessage = buildStatusMessage (am.badCreedentials, false)    
+            reject(returnMessage)
+        }            
+
+        const userInfo:user = await dbGetUser(credentials.username)
+
+        if(!userInfo){
+            returnMessage = buildStatusMessage (am.badCreedentials, false)    
+            reject(returnMessage)
+        }            
     
         const isValidPassword = verifyPassword(userInfo.password, credentials.password)
 
         if(!isValidPassword)
-            reject(failMessage(authMessages.badCreedentials))
+            return buildStatusMessage(am.badCreedentials, false)
+
+        if(!userInfo.active)
+            return buildStatusMessage(am.userNotActive, false)
 
         // const authtenticatedUser = await ObtenerUsuarioAutenticado(credenciales.idUsuario)
-
-        // if(!authtenticatedUser.estado)
-        //     reject(failMessage(authObjMessages.userNotActive))
-
         resolve(userInfo)     
+    })
+}
+
+
+export const singOutUser = async(credentials:UserCredentials):Promise<user> => {
+    return new Promise(async(resolve, reject)=>{
+
+        
     })
 }
